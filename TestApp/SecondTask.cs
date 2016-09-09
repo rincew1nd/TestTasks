@@ -9,8 +9,7 @@ namespace TestApp
 {
 	class SecondTask
 	{
-		Random rnd;
-		Stopwatch stopwatch;
+	    private readonly Stopwatch _stopwatch;
 
 		/// <summary>
 		/// Union of two arrays
@@ -19,18 +18,18 @@ namespace TestApp
 		/// <param name="secondArraySize">Size of second array</param>
 		public SecondTask(int firstArraySize, int secondArraySize)
 		{
-			rnd = new Random((int)DateTime.Now.Ticks);
-			stopwatch = new Stopwatch();
+		    var rnd = new Random((int)DateTime.Now.Ticks);
+			_stopwatch = new Stopwatch();
 			var first = new int[firstArraySize];
 			var second = new int[secondArraySize];
 
 			first[0] = 0 + rnd.Next(0, 10);
 			second[0] = 0 + rnd.Next(0, 10);
 
-			for (int i = 1; i < first.Length; i++)
-				first[i] = first[i - 1] + rnd.Next(0, 3);
-			for (int i = 1; i < second.Length; i++)
-				second[i] = second[i - 1] + rnd.Next(0, 3);
+			for (var i = 1; i < first.Length; i++)
+				first[i] = first[i - 1] + rnd.Next(1, 3);
+			for (var i = 1; i < second.Length; i++)
+				second[i] = second[i - 1] + rnd.Next(1, 3);
 
 			Console.WriteLine(Environment.NewLine + "Union");
 			CalcUnionHard(first, second);
@@ -45,14 +44,14 @@ namespace TestApp
 		/// <returns>Array with result of intersection</returns>
 		public void CalcUnionHard(int[] first, int[] second)
 		{
-			stopwatch.Reset();
-			stopwatch.Start();
+			_stopwatch.Reset();
+			_stopwatch.Start();
 
 			var union = new int[first.Length + second.Length];
 
-			int firstIndex = 0;
-			int secondIndex = 0;
-			int unionIndex = 0;
+			var firstIndex = 0;
+			var secondIndex = 0;
+			var unionIndex = 0;
 
 			while (true)
 			{
@@ -117,8 +116,8 @@ namespace TestApp
 			var unionCopy = new int[unionIndex];
 			Array.Copy(union, unionCopy, unionIndex);
 
-			stopwatch.Stop();
-			Console.WriteLine($"Custom method |Time elapsed {stopwatch.Elapsed}");
+			_stopwatch.Stop();
+			Console.WriteLine($"Custom method  | Time elapsed {_stopwatch.Elapsed}");
 
 			//PrintResult(unionCopy);
 		}
@@ -131,13 +130,13 @@ namespace TestApp
 		/// <returns>Array with result of intersection</returns>
 		public void CalcUnionEasy(int[] first, int[] second)
 		{
-			stopwatch.Reset();
-			stopwatch.Start();
+			_stopwatch.Reset();
+			_stopwatch.Start();
 
 			var union = first.Union(second).ToArray();
 
-			stopwatch.Stop();
-			Console.WriteLine($"Default method |Time elapsed {stopwatch.Elapsed}");
+			_stopwatch.Stop();
+			Console.WriteLine($"Default method | Time elapsed {_stopwatch.Elapsed}");
 
 			//PrintResult(union);
         }
