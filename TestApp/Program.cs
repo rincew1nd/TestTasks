@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.FourthTaskFolder;
+using TestApp.Models;
 
 namespace TestApp
 {
@@ -12,10 +13,19 @@ namespace TestApp
 	{
 		static void Main(string[] args)
 		{
-			new FirstTask(50, 50);
-            new SecondTask(50, 50);
-		    new FourthTask(10);
-			Console.ReadLine();
+            var firstTask = new FirstTask(50, 50);
+		    firstTask.CalcIntersectionCustom(firstTask.first, firstTask.second);
+
+            var secondTask = new SecondTask(50, 50);
+		    secondTask.CalcUnionCustom(secondTask.first, secondTask.second);
+
+            var fourthTask = new FourthTask(10);
+            fourthTask.BfsSearch(fourthTask.List);
+
+            var fifthTask = new FifthTask(10);
+            fifthTask.FindLoops(fifthTask.List);
+
+		    Console.ReadLine();
 		}
 	}
 }

@@ -1,3 +1,6 @@
 TestApp/bin/
 TestApp/obj/
 *.suo
+packages/
+UnitTest/bin/
+UnitTest/obj/

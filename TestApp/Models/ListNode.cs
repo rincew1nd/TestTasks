@@ -1,4 +1,4 @@
-namespace TestApp.FourthTaskFolder
+namespace TestApp.Models
 {
     public class ListNode
     {

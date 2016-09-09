@@ -44,9 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FourthTaskFolder\DFSNode.cs" />
+    <Compile Include="FifthTask\Fifth task.cs" />
+    <Compile Include="Models\DFSNode.cs" />
     <Compile Include="FourthTaskFolder\FourthTask.cs" />
-    <Compile Include="FourthTaskFolder\ListNode.cs" />
+    <Compile Include="Models\ListNode.cs" />
     <Compile Include="SecondTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,21 +7,23 @@ using System.Threading.Tasks;
 
 namespace TestApp
 {
-	class FirstTask
+	public class FirstTask
 	{
 	    private readonly Stopwatch _stopwatch;
+        public int[] first;
+        public int[] second;
 
-		/// <summary>
-		/// Intersection of two arrays
-		/// </summary>
-		/// <param name="firstArraySize">Size of first array</param>
-		/// <param name="secondArraySize">Size of second array</param>
-		public FirstTask(int firstArraySize, int secondArraySize)
+        /// <summary>
+        /// Intersection of two arrays
+        /// </summary>
+        /// <param name="firstArraySize">Size of first array</param>
+        /// <param name="secondArraySize">Size of second array</param>
+        public FirstTask(int firstArraySize, int secondArraySize)
 		{
 		    var rnd = new Random((int)DateTime.Now.Ticks);
 			_stopwatch = new Stopwatch();
-			var first = new int[firstArraySize];
-			var second = new int[secondArraySize];
+			first = new int[firstArraySize];
+			second = new int[secondArraySize];
 
 			first[0] = -30 + rnd.Next(0, 10);
 			second[0] = -30 + rnd.Next(0, 10);
@@ -32,8 +34,6 @@ namespace TestApp
 				second[i] = second[i-1] + rnd.Next(1, 3);
 
 			Console.WriteLine(Environment.NewLine + "Intersection");
-			CalcIntersectionHard(first, second);
-			CalcIntersectionEasy(first, second);
         }
 
 		/// <summary>
@@ -42,7 +42,7 @@ namespace TestApp
 		/// <param name="first">First array</param>
 		/// <param name="second">Second array</param>
 		/// <returns>Array with result of intersection</returns>
-		public int[] CalcIntersectionHard(int[] first, int[] second)
+		public int[] CalcIntersectionCustom(int[] first, int[] second)
 		{
 			_stopwatch.Reset();
 			_stopwatch.Start();
@@ -89,7 +89,7 @@ namespace TestApp
 
 			//PrintResult(intersectionCopy);
 
-			return intersection;
+			return intersectionCopy;
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace TestApp
 		/// <param name="first">First array</param>
 		/// <param name="second">Second array</param>
 		/// <returns>Array with result of intersection</returns>
-		public int[] CalcIntersectionEasy(int[] first, int[] second)
+		public int[] CalcIntersectionDefault(int[] first, int[] second)
 		{
 			_stopwatch.Reset();
 			_stopwatch.Start();

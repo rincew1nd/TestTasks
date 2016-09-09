@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace TestApp
 {
-	class SecondTask
+	public class SecondTask
 	{
 	    private readonly Stopwatch _stopwatch;
+
+	    public int[] first;
+	    public int[] second;
 
 		/// <summary>
 		/// Union of two arrays
@@ -20,8 +23,8 @@ namespace TestApp
 		{
 		    var rnd = new Random((int)DateTime.Now.Ticks);
 			_stopwatch = new Stopwatch();
-			var first = new int[firstArraySize];
-			var second = new int[secondArraySize];
+			first = new int[firstArraySize];
+			second = new int[secondArraySize];
 
 			first[0] = 0 + rnd.Next(0, 10);
 			second[0] = 0 + rnd.Next(0, 10);
@@ -32,8 +35,6 @@ namespace TestApp
 				second[i] = second[i - 1] + rnd.Next(1, 3);
 
 			Console.WriteLine(Environment.NewLine + "Union");
-			CalcUnionHard(first, second);
-			CalcUnionEasy(first, second);
 		}
 
 		/// <summary>
@@ -42,7 +43,7 @@ namespace TestApp
 		/// <param name="first">First array</param>
 		/// <param name="second">Second array</param>
 		/// <returns>Array with result of intersection</returns>
-		public void CalcUnionHard(int[] first, int[] second)
+		public int[] CalcUnionCustom(int[] first, int[] second)
 		{
 			_stopwatch.Reset();
 			_stopwatch.Start();
@@ -120,6 +121,8 @@ namespace TestApp
 			Console.WriteLine($"Custom method  | Time elapsed {_stopwatch.Elapsed}");
 
 			//PrintResult(unionCopy);
+
+		    return unionCopy;
 		}
 
 		/// <summary>
@@ -128,7 +131,7 @@ namespace TestApp
 		/// <param name="first">First array</param>
 		/// <param name="second">Second array</param>
 		/// <returns>Array with result of intersection</returns>
-		public void CalcUnionEasy(int[] first, int[] second)
+		public void CalcUnionDefault(int[] first, int[] second)
 		{
 			_stopwatch.Reset();
 			_stopwatch.Start();

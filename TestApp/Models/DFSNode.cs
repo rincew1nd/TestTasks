@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TestApp.FourthTaskFolder
+namespace TestApp.Models
 {
     public class TreeNode
     {

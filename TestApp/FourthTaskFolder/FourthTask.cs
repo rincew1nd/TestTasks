@@ -2,38 +2,38 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TestApp.Models;
 
 namespace TestApp.FourthTaskFolder
 {
-    /// I think the best way of detecting List loops is DFS (Depth-First Search)
+    /// I think the best way of detecting List loops is DFS (Depth-First Search) | But not optimal :(
     /// First of all we should convert List to DFS forest
     /// Then using the algorithm find loops in forest
 
     public class FourthTask
     {
+        public List<ListNode> List;
+
         public FourthTask(int size)
         {
             var rnd = new Random((int)DateTime.Now.Ticks);
-            var list = new List<ListNode>();
+            List = new List<ListNode>();
 
             for (var i = 0; i < size; i++)
             {
-                list.Add(new ListNode(i));
+                List.Add(new ListNode(i));
             }
             for (var i = 0; i < size; i++)
             {
                 if (rnd.Next(0, 10) > 1)
-                    list[i].NextNode = list[rnd.Next(0, size)];
+                    List[i].NextNode = List[rnd.Next(0, size)];
             }
-            
-            BfsSearch(list);
-            BfsSearchSlowLINQ(list);
         }
 
         /// <summary>
 		/// Depth first search for looping trees
 		/// </summary>
-		public void BfsSearch(List<ListNode> list)
+		public List<TreeNode> BfsSearch(List<ListNode> list)
         {
             Console.WriteLine($"\nDepth first search for looping trees");
 
@@ -91,13 +91,16 @@ namespace TestApp.FourthTaskFolder
             }
 
             stopwatch.Stop();
-            
+
+            Console.WriteLine($"Time elapsed {stopwatch.Elapsed}");
+
             //Print all elements with connections and looped nodes
-            forest.ForEach(elem => Console.WriteLine($"{elem} to {string.Join(" | ", elem.Neighbors)}"));
+            //forest.ForEach(elem => Console.WriteLine($"{elem} to {string.Join(" | ", elem.Neighbors)}"));
             foreach (var loopNode in loopNodes)
                 Console.WriteLine($"{loopNode} is a loop node");
 
-            Console.WriteLine($"Time elapsed {stopwatch.Elapsed}");
+
+            return loopNodes;
         }
 
         /// <summary>
@@ -159,8 +162,21 @@ namespace TestApp.FourthTaskFolder
             {
                 if (neighborNode == node) break;
                 if ((neighborNode.Level == node.Level && neighborNode.IsVisited == true) ||
+                    (neighborNode.IsVisited == true && !IsConnected(node, node.Neighbors.First())) ||
                     (!neighborNode.IsVisited))
                     SetLevel(neighborNode, node.Level+1);
+            }
+        }
+
+        public bool IsConnected(TreeNode node1, TreeNode node2)
+        {
+            while (true)
+            {
+                if (node2.Neighbors.Count == 0)
+                    return false;
+                if (node2.Neighbors.First() == node1)
+                    return true;
+                return IsConnected(node1, node2.Neighbors.First());
             }
         }
     }
